@@ -1,4 +1,5 @@
-# Snae player
+# Adi Music
+forked repo
 Lightweight on device music player right in your browser.
 
 Play your local audio files without a native app, using just your browser. Complete with Dark/Light theme support, artwork based UI coloring, animations and more.
