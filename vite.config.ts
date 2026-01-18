@@ -67,7 +67,7 @@ export default defineConfig({
 	},
 	plugins: [
 		themeColorsPlugin({
-			defaultColorSeed: '#cc9724',
+			defaultColorSeed: '#B3261E',
 			output: `${import.meta.dirname}/.generated/theme-colors.css`,
 		}),
 		imagetools(),
