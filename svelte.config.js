@@ -12,6 +12,10 @@ const config = {
 		},
 	},
 	kit: {
+		prerender: {
+			entries: ['*', '/icons/responsive.svg', '/icons/maskable.svg'],
+			handleUnseenRoutes: 'warn',
+		},
 		paths: {
 			relative: false,
 		},
