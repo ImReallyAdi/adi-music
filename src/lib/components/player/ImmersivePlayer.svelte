@@ -13,6 +13,7 @@
 	import RepeatButton from '$lib/components/player/buttons/RepeatButton.svelte'
 	import PlayerFavoriteButton from '$lib/components/player/buttons/PlayerFavoriteButton.svelte'
 	import ColorExtractor from '$lib/components/player/ColorExtractor.svelte'
+	import Lyrics from '$lib/components/player/Lyrics.svelte'
 	import { formatArtists } from '$lib/helpers/utils/text.ts'
 	import './immersive-player.css'
 
@@ -28,6 +29,7 @@
 	const artworkSrc = $derived(player.artworkSrc)
 
 	let controlsVisible = $state(true)
+	let showLyrics = $state(false)
 	let hideControlsTimeout: ReturnType<typeof setTimeout> | null = null
 	let container: HTMLElement | undefined = $state()
 
@@ -78,6 +80,8 @@
 		// n for next, p for previous
 		if (e.code === 'KeyN') player.next()
 		if (e.code === 'KeyP') player.previous()
+		// l for lyrics
+		if (e.code === 'KeyL') showLyrics = !showLyrics
 	}
 
 	const handleMouseMove = () => {
@@ -153,19 +157,38 @@
 					<Icon type="close" />
 				</IconButton>
 
-				<div class="text-label-md tracking-widest text-onSurface/60 uppercase">Now Playing</div>
+				<div class="text-label-md tracking-widest text-onSurface/60 uppercase">
+					{showLyrics ? 'Lyrics' : 'Now Playing'}
+				</div>
 
-				<PlayerFavoriteButton class="transition-transform hover:scale-110" />
+				<div class="flex items-center gap-2">
+					<IconButton
+						kind="flat"
+						icon="lyrics"
+						class={`transition-all ${showLyrics ? 'text-primary' : 'text-onSurfaceVariant'}`}
+						onclick={() => (showLyrics = !showLyrics)}
+						tooltip="Lyrics (L)"
+					/>
+					<PlayerFavoriteButton class="transition-transform hover:scale-110" />
+				</div>
 			</div>
 
-			<!-- Center: Album artwork (main focal point) -->
-			<div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-8">
-				<!-- Artwork with subtle animation -->
-				<div
-					class="aspect-square w-full max-w-96 rounded-3xl bg-surfaceContainerHighest shadow-2xl"
-				>
-					<PlayerArtwork class="h-full w-full rounded-3xl" />
-				</div>
+			<!-- Center: Album artwork or Lyrics -->
+			<div class="flex min-h-0 flex-1 flex-col items-center justify-center gap-8 w-full">
+				{#if showLyrics}
+					<div
+						class="h-full w-full max-w-4xl rounded-3xl bg-surfaceContainerHighest/30 backdrop-blur-md shadow-lg overflow-hidden animate-fade-in-scale"
+					>
+						<Lyrics />
+					</div>
+				{:else}
+					<!-- Artwork with subtle animation -->
+					<div
+						class="aspect-square w-full max-w-96 rounded-3xl bg-surfaceContainerHighest shadow-2xl animate-fade-in-scale"
+					>
+						<PlayerArtwork class="h-full w-full rounded-3xl" />
+					</div>
+				{/if}
 
 				<!-- Track info with optimized spacing -->
 				<div
@@ -173,7 +196,7 @@
 						controlsVisible
 							? 'translate-y-0 opacity-100'
 							: 'pointer-events-none translate-y-4 opacity-0'
-					}`}
+					} ${showLyrics ? 'hidden sm:block' : ''}`}
 				>
 					<h1 class="text-3xl sm:text-4xl mb-3 line-clamp-2 font-bold text-onSurface">
 						{track?.name ?? 'No track playing'}
