@@ -44,6 +44,7 @@
 	"dependencies": {
 		"@floating-ui/dom": "^1.7.4",
 		"@material/material-color-utilities": "^0.3.0",
+		"@material/web": "^2.4.1",
 		"@resvg/resvg-js": "^2.6.2",
 		"@tanstack/virtual-core": "^3.13.13",
 		"@types/dom-navigation": "^1.0.6",

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation'
+	import '$lib/mwc-init.ts'
 
 	const { children } = $props()
 

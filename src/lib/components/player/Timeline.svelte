@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { formatDuration } from '$lib/helpers/utils/format-duration.ts'
-	import Slider from '../Slider.svelte'
 
 	const { class: className }: { class?: ClassValue } = $props()
 
@@ -26,13 +25,6 @@
 	const currentTime = () => formatDuration(seeking ? getTime(seekingValue) : player.currentTime)
 
 	const getSliderValue = () => (seeking ? seekingValue : value)
-	const setSliderValue = (val: number) => {
-		if (seeking) {
-			seekingValue = val
-		} else {
-			playerSeek(val)
-		}
-	}
 </script>
 
 <div
@@ -45,23 +37,23 @@
 		{currentTime()}
 	</div>
 
-	<Slider
-		disabled={!player.activeTrack}
+	<md-slider
+		disabled={!player.activeTrack || undefined}
+		min="0"
 		{max}
-		bind:value={getSliderValue, setSliderValue}
-		onSeekStart={() => {
+		value={getSliderValue()}
+		oninput={(e: any) => {
 			if (!seeking) {
-				seekingValue = value
+				seeking = true
 			}
-
-			seeking = true
+			seekingValue = e.target.value
 		}}
-		onSeekEnd={() => {
+		onchange={(e: any) => {
 			seeking = false
-
-			playerSeek(seekingValue)
+			playerSeek(e.target.value)
 		}}
-	/>
+		class="w-full"
+	></md-slider>
 
 	<div class="text-right text-body-sm">
 		{formatDuration(player.duration)}

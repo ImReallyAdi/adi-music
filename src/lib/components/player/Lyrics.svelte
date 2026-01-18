@@ -102,10 +102,8 @@
 		>
 			{#each lyrics as line, i}
 				<div
-					class="my-3 max-w-3xl cursor-pointer px-4 transition-all duration-300 ease-out select-none
-                    {i === currentLineIndex
-						? 'scale-105 text-headline-sm font-bold text-primary opacity-100'
-						: 'scale-95 text-title-md text-onSurfaceVariant opacity-40 blur-[0.5px] hover:opacity-70 hover:blur-none'}"
+					class="my-4 max-w-3xl cursor-pointer px-6 py-2 transition-all duration-500 ease-emphasized select-none rounded-xl
+                    {i === currentLineIndex ? 'active-line text-headline-md' : 'inactive-line text-title-lg'}"
 					onclick={() => player.seek(line.time)}
 					onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && player.seek(line.time)}
 					role="button"
@@ -135,5 +133,28 @@
 	.scrollbar-hide {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
+	}
+
+	.active-line {
+		font-weight: 800;
+		color: var(--md-sys-color-primary);
+		filter: drop-shadow(0 0 12px var(--md-sys-color-primary));
+		opacity: 1;
+		transform: scale(1.05);
+		transform-origin: center;
+	}
+
+	.inactive-line {
+		color: var(--md-sys-color-on-surface-variant);
+		opacity: 0.4;
+		filter: blur(0.5px);
+		transform: scale(0.95);
+		transform-origin: center;
+	}
+
+	.inactive-line:hover {
+		opacity: 0.8;
+		filter: none;
+		background-color: var(--md-sys-color-surface-variant);
 	}
 </style>

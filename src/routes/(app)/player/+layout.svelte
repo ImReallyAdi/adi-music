@@ -16,7 +16,6 @@
 	import Lyrics from '$lib/components/player/Lyrics.svelte'
 	import PlayerArtwork from '$lib/components/player/PlayerArtwork.svelte'
 	import Timeline from '$lib/components/player/Timeline.svelte'
-	import Slider from '$lib/components/Slider.svelte'
 	import TracksListContainer from '$lib/components/tracks/TracksListContainer.svelte'
 	import { formatArtists } from '$lib/helpers/utils/text.ts'
 
@@ -38,7 +37,7 @@
 		class={[
 			layoutMode === 'both' && 'w-100',
 			layoutMode === 'list' && 'mx-auto w-full',
-			'player-content z-0 grow items-center gap-x-6 overflow-clip bg-secondaryContainerVariant px-2 pb-2',
+			'player-content glass-panel z-0 grow items-center gap-x-6 overflow-clip px-2 pb-2',
 			isCompactVertical && !sizes.isCompactHorizontal && 'player-content-horizontal',
 		]}
 	>
@@ -53,23 +52,21 @@
 			<div class="text-title-lg">{m.player()}</div>
 
 			<div class="flex items-center gap-1">
-				<IconButton
-					kind="flat"
-					tooltip="Lyrics"
-					icon="lyrics"
-					class={showLyrics ? 'text-primary' : 'text-onSurfaceVariant'}
+				<md-icon-button
+					toggle
+					selected={showLyrics}
 					onclick={() => (showLyrics = !showLyrics)}
-				/>
+				>
+					<Icon type="lyrics" />
+				</md-icon-button>
 
-				<IconButton
-					kind="flat"
-					tooltip="Immersive player"
+				<md-icon-button
 					onclick={async () => {
 						await goto('/immersive')
 					}}
 				>
 					<Icon type="fullscreen" />
-				</IconButton>
+				</md-icon-button>
 			</div>
 		</div>
 
@@ -110,19 +107,25 @@
 
 				{#if mainStore.volumeSliderEnabled}
 					<div class="flex items-center gap-2">
-						<IconButton
-							icon="volumeMid"
-							tooltip={m.playerDecreaseVolume()}
+						<md-icon-button
 							onclick={() => (player.volume -= 10)}
-						/>
+						>
+							<Icon type="volumeMid" />
+						</md-icon-button>
 
-						<Slider bind:value={player.volume} />
+						<md-slider
+							value={player.volume}
+							oninput={(e: any) => player.volume = e.target.value}
+							min="0"
+							max="100"
+							class="w-full"
+						></md-slider>
 
-						<IconButton
-							icon="volumeHigh"
-							tooltip={m.playerIncreaseVolume()}
+						<md-icon-button
 							onclick={() => (player.volume += 10)}
-						/>
+						>
+							<Icon type="volumeHigh" />
+						</md-icon-button>
 					</div>
 				{/if}
 			</div>
@@ -292,8 +295,8 @@
 			transform: none;
 			height: 100%;
 			animation:
-				view-player-container-rounded 400ms var(--ease-standard),
-				var(--vt-pl-card-morph-ani) 400ms var(--ease-standard);
+				view-player-container-rounded 500ms var(--ease-emphasized),
+				var(--vt-pl-card-morph-ani) 500ms var(--ease-emphasized);
 		}
 
 		&::view-transition-old(pl-card),
