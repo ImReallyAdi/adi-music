@@ -35,7 +35,7 @@ const config = {
 				'img-src': ['self', 'blob:', 'https://snaeplayer.goatcounter.com/count'],
 				'media-src': ['self', 'blob:'],
 				'font-src': ['self'],
-				'connect-src': ['self', 'https://snaeplayer.goatcounter.com'],
+				'connect-src': ['self', 'https://snaeplayer.goatcounter.com', 'https://lrclib.net'],
 				'form-action': ['none'],
 				'manifest-src': ['self'],
 				'base-uri': ['none'],
