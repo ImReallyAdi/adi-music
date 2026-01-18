@@ -13,6 +13,7 @@
 	import PlayTogglePillButton from '$lib/components/player/buttons/PlayTogglePillButton.svelte'
 	import RepeatButton from '$lib/components/player/buttons/RepeatButton.svelte'
 	import ShuffleButton from '$lib/components/player/buttons/ShuffleButton.svelte'
+	import Lyrics from '$lib/components/player/Lyrics.svelte'
 	import PlayerArtwork from '$lib/components/player/PlayerArtwork.svelte'
 	import Timeline from '$lib/components/player/Timeline.svelte'
 	import Slider from '$lib/components/Slider.svelte'
@@ -28,6 +29,8 @@
 	const sizes = $derived(data.sizes())
 	const isCompactVertical = $derived(sizes.isCompactVertical)
 	const layoutMode = $derived(data.layoutMode(sizes.isCompact, page.url.pathname))
+
+	let showLyrics = $state(false)
 </script>
 
 {#snippet playerSnippet()}
@@ -49,20 +52,38 @@
 
 			<div class="text-title-lg">{m.player()}</div>
 
-			<IconButton
-				kind="flat"
-				tooltip="Immersive player"
-				onclick={async () => {
-					await goto('/immersive')
-				}}
-			>
-				<Icon type="fullscreen" />
-			</IconButton>
+			<div class="flex items-center gap-1">
+				<IconButton
+					kind="flat"
+					tooltip="Lyrics"
+					icon="lyrics"
+					class={showLyrics ? 'text-primary' : 'text-onSurfaceVariant'}
+					onclick={() => (showLyrics = !showLyrics)}
+				/>
+
+				<IconButton
+					kind="flat"
+					tooltip="Immersive player"
+					onclick={async () => {
+						await goto('/immersive')
+					}}
+				>
+					<Icon type="fullscreen" />
+				</IconButton>
+			</div>
 		</div>
 
-		<PlayerArtwork
-			class="m-auto my-auto h-full max-h-75 rounded-2xl bg-onSecondary [grid-area:artwork] active-view-player:view-name-[pl-artwork]"
-		/>
+		{#if showLyrics}
+			<div
+				class="m-auto my-auto h-full w-full max-h-75 overflow-hidden rounded-2xl bg-surfaceContainerHighest shadow-md [grid-area:artwork]"
+			>
+				<Lyrics />
+			</div>
+		{:else}
+			<PlayerArtwork
+				class="m-auto my-auto h-full max-h-75 rounded-2xl bg-onSecondary [grid-area:artwork] active-view-player:view-name-[pl-artwork]"
+			/>
+		{/if}
 
 		<div class="mt-2 flex w-full flex-col gap-2 [grid-area:controls]">
 			<div class="w-full rounded-2xl bg-surfaceContainerHighest px-4 py-2">
