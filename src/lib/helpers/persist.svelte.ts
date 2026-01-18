@@ -10,7 +10,7 @@ export const getPersistedValue = <T, D = null>(
 	key: string,
 	defaultValue: D = null as D,
 ): T | D => {
-	const fullKey = `snaeplayer-${storeName}.${key}`
+	const fullKey = `adimusic-${storeName}.${key}`
 	const value = getValue(fullKey)
 
 	return value ?? defaultValue
@@ -20,7 +20,7 @@ export const persist = <T>(storeName: string, instance: T, keys: (keyof T)[]): v
 	for (const key of keys) {
 		invariant(typeof key === 'string', 'Key must be a string')
 
-		const fullKey = `snaeplayer-${storeName}.${key}`
+		const fullKey = `adimusic-${storeName}.${key}`
 
 		const value = getValue(fullKey)
 		if (value !== null) {

@@ -79,6 +79,11 @@
 	--ease-incoming80: cubic-bezier(0, 0, 0.2, 1);
 	--ease-incoming80outgoing40: cubic-bezier(0.4, 0, 0.2, 1);
 
+	/* Material 3 easing additions */
+	--ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+	--ease-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+	--ease-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+
 	--font-sans: 'Heebo', 'App CJK Fallback', system-ui, 'Noto Color Emoji', sans-serif;
 	--text-*: initial;
 }
@@ -356,6 +361,12 @@ source {
 @layer components {
 	.link {
 		text-decoration: underline;
+		transition: all 0.3s var(--ease-standard);
+	}
+
+	.link:hover {
+		color: var(--color-primary);
+		text-decoration-thickness: 2px;
 	}
 
 	.card {
@@ -364,6 +375,51 @@ source {
 		flex-direction: column;
 		border-radius: --spacing(2);
 		color: var(--color-onSurface);
+		border: 1px solid var(--color-outline-variant);
+		transition: all 0.3s var(--ease-standard);
+	}
+
+	.card:hover {
+		border-color: var(--color-outline);
+		box-shadow: 0 4px 12px --alpha(var(--color-primary) / 0.15);
+	}
+
+	/* Material 3 elevation shadows */
+	.elevation-1 {
+		box-shadow: 0 1px 3px --alpha(var(--color-shadow) / 0.12), 0 1px 2px --alpha(var(--color-shadow) / 0.24);
+	}
+
+	.elevation-2 {
+		box-shadow: 0 3px 6px --alpha(var(--color-shadow) / 0.15), 0 2px 4px --alpha(var(--color-shadow) / 0.12);
+	}
+
+	.elevation-3 {
+		box-shadow: 0 10px 20px --alpha(var(--color-shadow) / 0.15), 0 3px 6px --alpha(var(--color-shadow) / 0.10);
+	}
+
+	/* Material 3 state layers */
+	.state-layer {
+		position: relative;
+		transition: all 0.3s var(--ease-standard);
+	}
+
+	.state-layer::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: currentColor;
+		opacity: 0;
+		border-radius: inherit;
+		transition: opacity 0.3s var(--ease-standard);
+		pointer-events: none;
+	}
+
+	.state-layer:hover::before {
+		opacity: 0.08;
+	}
+
+	.state-layer:active::before {
+		opacity: 0.12;
 	}
 
 	.virtual-item {

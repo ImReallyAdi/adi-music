@@ -99,7 +99,7 @@ const createStore = <DBTypes extends DBSchema | unknown, Name extends StoreNames
 	})
 
 const openAppDatabase = () =>
-	openDB<AppDB>('snae-app-data', 2, {
+	openDB<AppDB>('adi-app-data', 2, {
 		async upgrade(db, oldVersion, _newVersion, tx) {
 			const { objectStoreNames } = db
 

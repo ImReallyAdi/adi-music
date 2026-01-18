@@ -1,25 +1,78 @@
-# Adi Music
-forked repo
-Lightweight on device music player right in your browser.
+# 🎧 Adi Music
+Your Music
+forked from **snae player**
 
-Play your local audio files without a native app, using just your browser. Complete with Dark/Light theme support, artwork based UI coloring, animations and more.
+Adi Music is a tiny, cozy music player that lives entirely in your browser.
+No installs, no uploads, no cloud nonsense. Just you, your local files, and vibes.
 
-## Limitations
-[File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API) is relatively new api which gives websites access to the files you choose. This app makes use of it when supported, for now that is only in Chromium based browsers. In other browsers legacy Files api is used which forces app to copy files inside IndexedDB, effectively duplicating used storage space, in oder to work correctly.
+It’s built to be fast, simple, and respectful of your device.
+Dark mode, light mode, smooth animations, and UI colors that adapt to your album art included ✨
 
-## Works with
-With limitations in mind app works with every modern browser.
+---
 
-## Privacy
-Minimal, privacy preserving analytics, provided by [GoatCounter](https://goatcounter.com/), are used to count page views.
+## 🌈 Features
 
-## Building locally
-Clone the repo, and:
-```
+* Plays your local audio files directly in the browser
+* Fully on-device. Your music never leaves your machine
+* Dark & Light themes
+* Artwork-based dynamic UI coloring
+* Smooth, playful animations
+* Lightweight and fast
+* Open source and hackable
+
+---
+
+## ⚠️ A Note on Browser Support
+
+Adi Music uses the **File System Access API**, a newer web API that lets websites access files *only* when you allow it.
+
+* Works best on **Chromium-based browsers** (Chrome, Edge, Brave, etc.)
+* Other browsers fall back to the legacy Files API
+* In fallback mode, files are copied into IndexedDB, which may use extra storage
+
+This keeps the app usable everywhere, even if the experience isn’t identical.
+
+---
+
+## 🌍 Works With
+
+All modern browsers.
+Best experience on Chromium-based ones. 
+
+---
+
+## 🔐 Privacy 
+
+Adi Music uses minimal, privacy-friendly analytics to count page views.
+No tracking, no ads, no creepy stuff. *yuck tbh*
+Powered by GoatCounter 🐐
+
+---
+
+## 🛠️ Run It Locally
+
+Clone the repo and run:
+
+```bash
 pnpm install
 pnpm run build
 ```
-You can run the development server with:
-```
+
+Start the dev server:
+
+```bash
 pnpm run dev
 ```
+
+---
+
+## 💖 Open Source
+
+This project is open source!
+Feel free to fork it, break it, improve it, or remix it into something new.
+*(like i did ig ><)*
+
+# AI info
+This project will have alot of AI commits.
+
+**Edited with love by imreallyadi**

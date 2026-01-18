@@ -8,7 +8,7 @@ export const ssr = false
 export const prerender = false
 
 const initLocale = () => {
-	const savedLocale = localStorage.getItem('snae-locale')
+	const savedLocale = localStorage.getItem('adi-locale')
 	const locale = isLocale(savedLocale) ? savedLocale : baseLocale
 
 	document.documentElement.lang = locale
@@ -20,7 +20,7 @@ if (browser) {
 	const locale = initLocale()
 	overwriteGetLocale(() => locale)
 	overwriteSetLocale((locale) => {
-		localStorage.setItem('snae-locale', locale)
+		localStorage.setItem('adi-locale', locale)
 		window.location.reload()
 	})
 

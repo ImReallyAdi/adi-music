@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state'
+	import { goto } from '$app/navigation'
 	import BackButton from '$lib/components/BackButton.svelte'
 	import Button from '$lib/components/Button.svelte'
 	import Header from '$lib/components/Header.svelte'
@@ -48,7 +49,15 @@
 
 			<div class="text-title-lg">{m.player()}</div>
 
-			<div class="w-10"></div>
+			<IconButton
+				kind="flat"
+				tooltip="Immersive player"
+				onclick={async () => {
+					await goto('/immersive')
+				}}
+			>
+				<Icon type="fullscreen" />
+			</IconButton>
 		</div>
 
 		<PlayerArtwork

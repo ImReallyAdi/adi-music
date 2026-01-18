@@ -1,0 +1,182 @@
+/* Premium immersive player styles */
+
+.immersive-player {
+	/* Hardware acceleration */
+	will-change: transform;
+	transform: translateZ(0);
+}
+
+/* Smooth entrance animation */
+@keyframes playerFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.immersive-player {
+	animation: playerFadeIn 0.3s cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
+}
+
+/* Album artwork scale effect on track change */
+@keyframes artworkScale {
+	0% {
+		transform: scale(0.95);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.immersive-player :global(.artwork-container) {
+	animation: artworkScale 0.6s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+/* Control button hover effects */
+.immersive-player :global(button) {
+	position: relative;
+	overflow: hidden;
+}
+
+/* Smooth focus ring transitions */
+.immersive-player :global(button:focus-visible) {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+	border-radius: 0.5rem;
+}
+
+/* Play button pulsing effect when paused */
+@keyframes playPulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 var(--color-primary);
+	}
+	50% {
+		box-shadow: 0 0 0 12px rgba(179, 38, 30, 0);
+	}
+}
+
+.immersive-player :global([data-paused="true"] .play-button) {
+	animation: playPulse 2s infinite;
+}
+
+/* Smooth transitions for all state changes */
+.immersive-player {
+	--ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
+	--ease-decelerate: cubic-bezier(0, 0, 0.38, 0.9);
+	--ease-accelerate: cubic-bezier(0.2, 0, 1, 1);
+}
+
+/* Timeline progress animation */
+.immersive-player :global(.timeline-progress) {
+	transition: width 0.1s linear;
+}
+
+/* Volume slider smooth transitions */
+.immersive-player :global(.volume-slider) {
+	transition: all 0.2s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+/* Text animations for track info */
+@keyframes textFadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.immersive-player h1 {
+	animation: textFadeInUp 0.6s cubic-bezier(0.2, 0, 0.38, 0.9) 0.1s backwards;
+}
+
+.immersive-player p {
+	animation: textFadeInUp 0.6s cubic-bezier(0.2, 0, 0.38, 0.9) 0.2s backwards;
+}
+
+/* Backdrop blur effect */
+.immersive-player :global(.backdrop) {
+	backdrop-filter: blur(24px);
+	transition: backdrop-filter 0.3s ease;
+}
+
+/* Control group animations */
+@keyframes controlsSlideUp {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.immersive-player :global(.controls-group) {
+	animation: controlsSlideUp 0.5s cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
+}
+
+/* Subtle glow effect for primary action */
+@keyframes subtleGlow {
+	0%,
+	100% {
+		box-shadow: 0 0 20px rgba(179, 38, 30, 0.3);
+	}
+	50% {
+		box-shadow: 0 0 30px rgba(179, 38, 30, 0.5);
+	}
+}
+
+.immersive-player :global(.primary-action:hover) {
+	animation: subtleGlow 2s ease-in-out;
+}
+
+/* Responsive touch targets */
+@media (hover: none) and (pointer: coarse) {
+	.immersive-player :global(button) {
+		min-height: 56px;
+		min-width: 56px;
+		padding: 12px;
+	}
+}
+
+/* Smooth color transitions for dynamic background */
+.immersive-player :global([style*="background"]) {
+	transition: background 0.6s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+/* Prevent layout shift during state changes */
+.immersive-player {
+	contain: layout style paint;
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+	.immersive-player {
+		background: #000;
+		color: #fff;
+	}
+}
+
+/* Reduce motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.immersive-player,
+	.immersive-player * {
+		animation: none !important;
+		transition: none !important;
+	}
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+	.immersive-player :global(button) {
+		border: 1px solid currentColor;
+	}
+}

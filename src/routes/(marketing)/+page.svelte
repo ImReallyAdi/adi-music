@@ -16,49 +16,53 @@
 	const features: Feature[] = [
 		{
 			icon: 'palette',
-			title: 'Adaptive theming',
+			title: 'Dynamic theming',
 			description:
-				'Beautiful interface that changes colors to match your music artwork and follows your system theme.',
+				'Material 3 inspired design that adapts to your music artwork with stunning color harmonies and smooth transitions.',
 		},
 		{
 			icon: 'flash',
-			title: 'Lightning fast',
+			title: 'Blazingly fast',
 			description:
-				'Opens instantly, plays seamlessly, with responsive controls built for modern browsers.',
+				'Optimized performance with instant loading, seamless playback, and responsive controls for modern browsers.',
 		},
 		{
 			icon: 'cellphone',
-			title: 'Use anywhere',
+			title: 'Works everywhere',
 			description:
-				'Works great on your phone, tablet, or computer. Just open it in your browser - no downloads needed.',
+				'Experience adi music on your phone, tablet, or desktop. Open in your browser—no downloads, no complications.',
 		},
 		{
 			icon: 'lock',
-			title: 'Privacy-first design',
+			title: 'Privacy by design',
 			description:
-				'Your music never leaves your device. No accounts, minimal privacy-preserving analytics. Just you and your music.',
+				'Your music stays on your device. No tracking, no accounts, no compromise. Just you, your music, and your privacy.',
 		},
 	]
 
 	const benefits = [
-		'Browse and find songs with smart search and filters',
-		'Make custom playlists for every mood and moment',
-		'Control playback with keyboard shortcuts and media keys',
-		'Works completely offline - no internet needed',
+		'Browse and discover with intelligent search and advanced filters',
+		'Create custom playlists for every mood, moment, and occasion',
+		'Control playback with keyboard shortcuts and native media keys',
+		'Works completely offline—your music, always accessible',
+		'Syncs playback state across your devices seamlessly',
 	]
 </script>
 
 <svelte:head>
-	<title>{m.appName()} - Your music, your way</title>
+	<title>{m.appName()} - Your Music, Your Way</title>
 	<meta
 		name="description"
-		content="Free online music player for your local music library. Play songs directly in your browser with no downloads, no sign-up, and complete privacy. Works offline on any device."
+		content="adi music: A fork of Snae Player—a privacy-first, high-performance music player for your local library. Designed with Material 3 principles for a beautiful, expressive experience."
 	/>
 
 	<link rel="canonical" href={page.url.href} />
 </svelte:head>
 
 <Header title={m.appName()} noBackButton mode="fixed-no-spacer">
+	<div class="flex items-center gap-2 text-body-md text-onSurfaceVariant">
+		<span class="text-label-md">A fork of Snae Player</span>
+	</div>
 	<IconButton
 		as="a"
 		href="https://github.com/minht11/local-music-pwa"
@@ -83,8 +87,8 @@
 		<p
 			class="mx-auto mb-8 max-w-2xl text-title-md leading-relaxed text-onSurfaceVariant sm:text-title-lg"
 		>
-			Enjoy all your favorite songs with a fast, privacy-focused music player that works right in
-			your browser.
+			Experience a beautifully designed music player built for your local library. Privacy-focused, fast, and
+			expressive—just like your music deserves.
 		</p>
 
 		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -109,34 +113,39 @@
 <section class="content-width py-20">
 	<div class="mb-16 text-center">
 		<h2 class="mb-4 text-headline-md font-bold text-onSurface sm:text-headline-md">
-			Made for people who love music
+			Music the way you want it
 		</h2>
 		<p class="mx-auto max-w-xl text-title-md text-onSurfaceVariant">
-			Simple features that make listening to your music collection a joy, without compromising your
-			privacy.
+			Designed with Material 3 principles for beauty and expressiveness. Features that celebrate your music without compromising
+			your privacy.
 		</p>
 	</div>
 
 	<div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
 		{#each features as feature}
 			<div
-				class="card group p-8 transition-shadow duration-300 hover:bg-inverseSurface hover:shadow-lg"
+				class="card group relative overflow-hidden p-8 transition-all duration-300 hover:bg-inverseSurface hover:shadow-2xl"
 			>
 				<div
-					class="mb-6 flex size-12 items-center justify-center rounded-full bg-tertiaryContainer"
-				>
-					<Icon type={feature.icon} class="text-primary" />
+					class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+				></div>
+				<div class="relative z-10">
+					<div
+						class="mb-6 flex size-12 items-center justify-center rounded-full bg-tertiaryContainer transition-transform duration-300 group-hover:scale-110"
+					>
+						<Icon type={feature.icon} class="text-primary" />
+					</div>
+					<h3
+						class="mb-3 text-title-lg font-semibold text-onSurface transition-colors duration-300 group-hover:text-inverseOnSurface"
+					>
+						{feature.title}
+					</h3>
+					<p
+						class="text-body-lg leading-relaxed text-onSurfaceVariant transition-colors duration-300 group-hover:text-inverseOnSurface"
+					>
+						{feature.description}
+					</p>
 				</div>
-				<h3
-					class="mb-3 text-title-lg font-semibold text-onSurface group-hover:text-inverseOnSurface"
-				>
-					{feature.title}
-				</h3>
-				<p
-					class="text-body-lg leading-relaxed text-onSurfaceVariant group-hover:text-inverseOnSurface"
-				>
-					{feature.description}
-				</p>
 			</div>
 		{/each}
 	</div>
@@ -147,21 +156,24 @@
 		<div class="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
 			<div>
 				<h2 class="mb-6 text-headline-md font-bold text-onSurface sm:text-headline-md">
-					Everything you need to enjoy your music
+					Everything you need in one beautiful app
 				</h2>
 				<ul class="space-y-4">
 					{#each benefits as benefit}
-						<li class="flex items-center gap-3">
-							<div class="rounded-full bg-surfaceContainerHighest p-1">
-								<Icon type="check" class="text-primary" />
+						<li class="group flex items-center gap-4 transition-all duration-300">
+							<div class="relative">
+								<div class="rounded-full bg-primary/10 p-2 transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
+									<Icon type="check" class="text-primary transition-colors duration-300 group-hover:text-onPrimary" />
+								</div>
+								<div class="absolute inset-0 rounded-full bg-primary/20 opacity-0 scale-150 animate-pulse group-hover:opacity-0"></div>
 							</div>
-							<span class="text-body-lg text-onSurfaceVariant">{benefit}</span>
+							<span class="text-body-lg text-onSurfaceVariant transition-colors duration-300 group-hover:text-onSurface">{benefit}</span>
 						</li>
 					{/each}
 				</ul>
 			</div>
 			<img
-				class="flex w-full items-center justify-center rounded-2xl bg-surfaceContainerHigh object-contain object-bottom ring ring-outline/10"
+				class="flex w-full items-center justify-center rounded-2xl bg-surfaceContainerHigh object-contain object-bottom ring ring-outline/10 transition-transform duration-300 hover:scale-105"
 				src={secondaryImg.src}
 				width={secondaryImg.width}
 				height={secondaryImg.height}
@@ -175,11 +187,10 @@
 <section class="content-width py-20">
 	<div class="mx-auto max-w-xl text-center">
 		<h2 class="mb-6 text-headline-md font-bold text-onSurface sm:text-headline-md">
-			Ready to dive into your music?
+			Ready to experience great music?
 		</h2>
 		<p class="mb-8 text-title-md text-onSurfaceVariant">
-			Start exploring your music collection in a whole new way. It's free, private, and ready to use
-			right now.
+			Start exploring your music collection with a beautifully designed player that respects your privacy and celebrates your music.
 		</p>
 		<Button as="a" href="/library/tracks" kind="filled">
 			Open {m.appName()}
@@ -188,18 +199,19 @@
 </section>
 
 <footer class="content-width py-8">
-	<div class="w-full rounded-4xl bg-surfaceContainerHigh p-8 shadow-lg">
+	<div class="w-full rounded-4xl bg-gradient-to-br from-surfaceContainerHigh to-surfaceContainerHighest p-8 shadow-2xl transition-all duration-300 hover:shadow-3xl">
 		<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-			<div class="flex items-center gap-2 text-title-md font-medium text-onSurface">
-				<img src="/icons/responsive.svg" width="24" height="24" alt="Logo" class="size-6" />
-				{m.appName()}
+			<div class="flex items-center gap-3 text-title-md font-medium text-onSurface">
+				<img src="/icons/responsive.svg" width="24" height="24" alt="adi music Logo" class="size-6 transition-transform duration-300 hover:scale-110" />
+				<span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{m.appName()}</span>
+				<span class="text-body-sm text-onSurfaceVariant">• Fork of <a href="https://github.com/minht11/snae-player" target="_blank" class="link text-primary hover:underline">Snae Player</a></span>
 			</div>
 
 			<div class="flex items-center gap-6 text-body-md">
 				<a
 					href="https://github.com/minht11/local-music-pwa"
 					target="_blank"
-					class="link flex items-center gap-2 text-onSurfaceVariant transition-colors duration-200 hover:text-onSurface"
+					class="link flex items-center gap-2 text-onSurfaceVariant transition-all duration-200 hover:text-primary hover:scale-105"
 				>
 					<Icon type="github" class="h-5 w-5" />
 					{m.aboutSourceCode()}
@@ -208,7 +220,7 @@
 				<a
 					href="https://github.com/minht11/local-music-pwa#privacy"
 					target="_blank"
-					class="link text-onSurfaceVariant transition-colors duration-200 hover:text-onSurface"
+					class="link text-onSurfaceVariant transition-all duration-200 hover:text-primary hover:scale-105"
 				>
 					{m.aboutPrivacy()}
 				</a>
@@ -234,20 +246,24 @@
 	}
 
 	.card {
-		transition: all 0.3s ease;
+		transition: all var(--ease-standard) 0.3s;
+		border-radius: 1rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
 	}
 
 	.card:hover {
-		transform: translateY(-2px);
+		transform: translateY(-4px);
+		border-color: var(--color-primary);
 	}
 
 	.hero-image-slide-in {
-		animation: hero-image-slide-in 0.5s ease-out forwards;
+		animation: hero-image-slide-in 0.6s var(--ease-outgoing40) forwards;
 	}
 
 	@keyframes hero-image-slide-in {
 		0% {
-			transform: translateY(40px);
+			transform: translateY(48px);
 			opacity: 0;
 		}
 		100% {
@@ -259,35 +275,37 @@
 	.animated-gradient {
 		background: radial-gradient(
 			ellipse 1400px 800px at 0% 30%,
-			--alpha(var(--color-tertiary) / 0.1),
-			--alpha(var(--color-tertiary) / 0.1),
-			--alpha(var(--color-tertiary) / 0.04),
+			--alpha(var(--color-tertiary) / 0.15),
+			--alpha(var(--color-tertiary) / 0.08),
 			transparent 60%
 		);
-		filter: blur(10px);
+		filter: blur(16px);
 		transform-origin: top;
-		animation: glow-pulse 20s ease-in-out infinite;
+		animation: glow-pulse 24s ease-in-out infinite;
 	}
 
 	@keyframes glow-pulse {
 		0% {
-			transform: scale(0.95, 1);
-			opacity: 0.7;
+			transform: scale(0.9, 1);
+			opacity: 0.6;
 		}
 		50% {
-			transform: scale(1.4, 1);
+			transform: scale(1.5, 1);
 			opacity: 1;
 		}
 		100% {
-			transform: scale(0.95, 1);
-			opacity: 0.7;
+			transform: scale(0.9, 1);
+			opacity: 0.6;
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.hero-image-slide-in,
-		.animated-gradient {
+		.animated-gradient,
+		.card,
+		.group {
 			animation: none;
+			transition: none;
 		}
 	}
 </style>

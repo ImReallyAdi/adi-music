@@ -1,64 +1,79 @@
 <!doctype html>
 <html lang="en" class="dark" data-sveltekit-preload-data="false">
-	<head>
-		<meta charset="utf-8" />
+<head>
+  <meta charset="utf-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
 
-		%snae.theme-color-meta%
+  %adi.theme-color-meta%
 
-		<title>Snae Player</title>
+  <title>adi music · your music, your way</title>
+  <meta
+    name="description"
+    content="adi music is an indie, privacy-first music player that runs entirely in your browser. Fast, expressive, and built for your local library."
+  />
 
-		<meta name="description" content="Lightweight on device music player right in your browser." />
+  <!-- Icons -->
+  <link rel="icon" href="/IMG_0296.png" type="image/png" sizes="any" />
+  <link rel="apple-touch-icon" href="/IMG_0296.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
-		<link rel="icon" href="/icons/raster-16.png" sizes="16x16" type="image/png" />
-		<link rel="icon" href="/icons/raster-32.png" sizes="32x32" type="image/png" />
-		<link rel="icon" href="/icons/raster-48.png" sizes="48x48" type="image/png" />
-		<link rel="icon" href="/icons/raster-128.png" sizes="128x128" type="image/png" />
-		<link rel="icon" href="/icons/raster-192.png" sizes="192x192" type="image/png" />
+  <!-- Fonts -->
+  <link
+    rel="preload"
+    href="/fonts/Heebo.latin.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
 
-		<link rel="icon" href="/icons/responsive.svg" type="image/svg+xml" />
+  %sveltekit.head%
+</head>
 
-		<link
-			rel="preload"
-			href="/fonts/Heebo.latin.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin="anonymous"
-		/>
+<body>
+  <noscript>
+    <div style="padding:1rem;text-align:center;">
+      this app needs javascript to play music 💔  
+      please enable it and reload.
+    </div>
+  </noscript>
 
-		%sveltekit.head%
+  <div
+    id="unsupported-browser"
+    hidden
+    class="m-auto rounded-2xl bg-[dimgray] p-5 text-white max-w-md text-center"
+  >
+    <p class="mb-2">
+      your browser is missing a few features adi music needs.
+    </p>
+    <p class="mb-4">
+      try updating or switching to a modern browser:
+    </p>
 
-		<link rel="manifest" href="/manifest.webmanifest" />
-	</head>
+    <div class="flex gap-3 justify-center flex-wrap">
+      <a class="link text-primary" href="https://www.mozilla.org/firefox/new/">Firefox</a>
+      <a class="link text-primary" href="https://www.google.com/chrome/">Chrome</a>
+      <a class="link text-primary" href="https://www.microsoft.com/edge">Edge</a>
+      <a class="link text-primary" href="https://www.apple.com/safari/">Safari</a>
+    </div>
+  </div>
 
-	<body>
-		<noscript> Please enable Javascript in order to use this app. </noscript>
-		<div id="unsupported-browser" hidden class="m-auto rounded-2xl bg-[dimgray] p-5 text-[white]">
-			<div>
-				This browser does not support required technologies for this app to function correctly.
-			</div>
-			<div>Please upgrade your browser to the latest version of:</div>
-			<a class="link text-primary" href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>
-			<a class="link text-primary" href="https://www.microsoft.com/en-us/windows/microsoft-edge">
-				Edge
-			</a>
-			<a class="link text-primary" href="https://www.google.com/chrome/">Chrome</a>
-			<a class="link text-primary" href="https://www.apple.com/safari/">Safari</a>
-		</div>
+  %adi.svg-icons-paths%
 
-		%snae.svg-icons-paths%
+  <div id="app">%sveltekit.body%</div>
 
-		<div id="app">%sveltekit.body%</div>
+  <!-- Privacy-friendly analytics -->
+  <script
+    src="https://gc.zgo.at/count.js"
+    data-goatcounter="https://adimusic.goatcounter.com/count"
+    data-goatcounter-settings='{"no_onload": true}'
+    crossorigin="anonymous"
+    async
+  ></script>
 
-		<script
-			src="https://gc.zgo.at/count.js"
-			data-goatcounter="https://snaeplayer.goatcounter.com/count"
-			crossorigin="anonymous"
-			async
-			data-goatcounter-settings='{"no_onload": true}'
-		></script>
-
-		<script defer src="/supported-browser-check.js"></script>
-	</body>
+  <script defer src="/supported-browser-check.js"></script>
+</body>
 </html>

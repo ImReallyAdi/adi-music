@@ -43,7 +43,7 @@ export const setupTheme = (): void => {
 			? player.activeTrack?.primaryColor
 			: undefined
 
-		const argbOrHex = artworkArgb ?? mainStore.customThemePaletteHex
+		const argbOrHex = artworkArgb ?? mainStore.customThemePaletteHex ?? '#B3261E'
 
 		if (initial) {
 			initial = false
@@ -52,6 +52,7 @@ export const setupTheme = (): void => {
 				updateWindowTileBarColor(isDark)
 			}
 
+			// On initial load, if no custom color is set we use Material Red as default
 			// On initial load, if no custom color is set we can skip
 			// loading module which relatively heavy
 			if (!argbOrHex) {

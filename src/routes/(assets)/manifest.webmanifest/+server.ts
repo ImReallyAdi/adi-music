@@ -11,7 +11,7 @@ const manifest = {
 	background_color: THEME_PALLETTE_DARK.surface,
 	display: 'standalone',
 	orientation: 'any',
-	description: 'Lightweight on device music player right in your browser.',
+	description: 'adi music - A privacy-first, high-performance music player with Material 3 design for your local library.',
 	icons: [
 		{
 			src: '/icons/raster-192.png',
