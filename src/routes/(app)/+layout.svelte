@@ -14,6 +14,9 @@
 	import { setPlayerStoreContext } from '$lib/stores/player/use-store.ts'
 	import { onViewTransitionPrepare, setupAppViewTransitions } from '$lib/view-transitions.svelte.ts'
 	import { setupAppInstallPromptListeners } from './layout/app-install-prompt.ts'
+	import { extractZip } from '$lib/helpers/archive.ts'
+	import { scanTracks } from '$lib/library/scan-actions/scan-tracks.ts'
+	import { snackbar } from '$lib/components/snackbar/snackbar.ts'
 	import {
 		type DirectoriesPermissionPromptSnackbarArg,
 		setupDirectoriesPermissionPrompt,
@@ -79,6 +82,52 @@
 	if (browser) {
 		void setupDirectoriesPermissionPrompt(directoriesPermissionSnackbar)
 	}
+
+	const handleDroppedFiles = async (files: File[]) => {
+		const audioFiles: File[] = []
+		const zipFiles: File[] = []
+
+		const supportedExtensions = ['aac', 'mp3', 'ogg', 'wav', 'flac', 'm4a', 'opus', 'webm']
+
+		for (const file of files) {
+			const lowerName = file.name.toLowerCase()
+			if (lowerName.endsWith('.zip')) {
+				zipFiles.push(file)
+			} else if (supportedExtensions.some((ext) => lowerName.endsWith(`.${ext}`))) {
+				audioFiles.push(file)
+			}
+		}
+
+		if (zipFiles.length > 0) {
+			snackbar({
+				id: 'unzip',
+				message: 'Extracting ZIP files...',
+				controls: false,
+				duration: false,
+			})
+			for (const zip of zipFiles) {
+				try {
+					const extracted = await extractZip(zip)
+					audioFiles.push(...extracted)
+				} catch (e) {
+					console.error('Failed to unzip', e)
+					snackbar({
+						id: 'unzip-error',
+						message: `Failed to unzip ${zip.name}`,
+						duration: 3000,
+					})
+				}
+			}
+			snackbar({ id: 'unzip', message: 'ZIP extraction complete', duration: 2000 })
+		}
+
+		if (audioFiles.length > 0) {
+			await scanTracks({
+				action: 'legacy-files-add',
+				files: audioFiles,
+			})
+		}
+	}
 </script>
 
 {#snippet directoriesPermissionSnackbar({ dirs, dismiss }: DirectoriesPermissionPromptSnackbarArg)}
@@ -117,6 +166,16 @@
 			e.preventDefault()
 
 			player.togglePlay()
+		}
+	}}
+	ondragover={(e) => {
+		e.preventDefault()
+	}}
+	ondrop={async (e) => {
+		e.preventDefault()
+		if (e.dataTransfer?.files?.length) {
+			const files = Array.from(e.dataTransfer.files)
+			await handleDroppedFiles(files)
 		}
 	}}
 />

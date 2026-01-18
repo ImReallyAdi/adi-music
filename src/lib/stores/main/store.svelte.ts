@@ -42,7 +42,7 @@ export class MainStore {
 		return motion === 'reduced'
 	}
 
-	pickColorFromArtwork: boolean = $state(true)
+	pickColorFromArtwork: boolean = $state(false)
 
 	customThemePaletteHex: string | null = $state(null)
 
