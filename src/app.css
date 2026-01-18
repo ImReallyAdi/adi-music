@@ -88,6 +88,61 @@
 	--text-*: initial;
 }
 
+:root {
+	/* Map existing color variables to MWC tokens */
+	--md-sys-color-primary: var(--color-primary);
+	--md-sys-color-on-primary: var(--color-onPrimary);
+	--md-sys-color-primary-container: var(--color-primaryContainer);
+	--md-sys-color-on-primary-container: var(--color-onPrimaryContainer);
+	--md-sys-color-secondary: var(--color-secondary);
+	--md-sys-color-on-secondary: var(--color-onSecondary);
+	--md-sys-color-secondary-container: var(--color-secondaryContainer);
+	--md-sys-color-on-secondary-container: var(--color-onSecondaryContainer);
+	--md-sys-color-tertiary: var(--color-tertiary);
+	--md-sys-color-on-tertiary: var(--color-onTertiary);
+	--md-sys-color-tertiary-container: var(--color-tertiaryContainer);
+	--md-sys-color-on-tertiary-container: var(--color-onTertiaryContainer);
+	--md-sys-color-error: var(--color-error);
+	--md-sys-color-on-error: var(--color-onError);
+	--md-sys-color-error-container: var(--color-errorContainer);
+	--md-sys-color-on-error-container: var(--color-onErrorContainer);
+	--md-sys-color-surface: var(--color-surface);
+	--md-sys-color-on-surface: var(--color-onSurface);
+	--md-sys-color-surface-variant: var(--color-surfaceVariant);
+	--md-sys-color-on-surface-variant: var(--color-onSurfaceVariant);
+	--md-sys-color-outline: var(--color-outline);
+	--md-sys-color-outline-variant: var(--color-outlineVariant);
+	--md-sys-color-shadow: var(--color-shadow);
+	--md-sys-color-scrim: var(--color-scrim);
+	--md-sys-color-inverse-surface: var(--color-inverseSurface);
+	--md-sys-color-inverse-on-surface: var(--color-inverseOnSurface);
+	--md-sys-color-inverse-primary: var(--color-inversePrimary);
+	--md-sys-color-surface-container-highest: var(--color-surfaceContainerHighest);
+	--md-sys-color-surface-container-high: var(--color-surfaceContainerHigh);
+	--md-sys-color-surface-container: var(--color-surfaceContainer);
+	--md-sys-color-surface-container-low: var(--color-surfaceContainerLow);
+	--md-sys-color-surface-container-lowest: var(--color-surfaceContainerLowest);
+	--md-sys-color-surface-bright: var(--color-surfaceBright);
+	--md-sys-color-surface-dim: var(--color-surfaceDim);
+
+	/* M3 Typography Scale base settings */
+	--md-sys-typescale-display-large-font: var(--font-sans);
+	--md-sys-typescale-display-medium-font: var(--font-sans);
+	--md-sys-typescale-display-small-font: var(--font-sans);
+	--md-sys-typescale-headline-large-font: var(--font-sans);
+	--md-sys-typescale-headline-medium-font: var(--font-sans);
+	--md-sys-typescale-headline-small-font: var(--font-sans);
+	--md-sys-typescale-title-large-font: var(--font-sans);
+	--md-sys-typescale-title-medium-font: var(--font-sans);
+	--md-sys-typescale-title-small-font: var(--font-sans);
+	--md-sys-typescale-label-large-font: var(--font-sans);
+	--md-sys-typescale-label-medium-font: var(--font-sans);
+	--md-sys-typescale-label-small-font: var(--font-sans);
+	--md-sys-typescale-body-large-font: var(--font-sans);
+	--md-sys-typescale-body-medium-font: var(--font-sans);
+	--md-sys-typescale-body-small-font: var(--font-sans);
+}
+
 html {
 	background-color: var(--color-surface);
 	color: var(--color-onSurface);
@@ -193,6 +248,18 @@ source {
 
 	strong {
 		font-weight: 600;
+	}
+
+	/* Expensive Aesthetic */
+	.glass-panel {
+		background: color-mix(in srgb, var(--color-surfaceContainerHigh) 60%, transparent);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border: 1px solid var(--color-outline-variant);
+	}
+
+	.depth-effect {
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	}
 }
 

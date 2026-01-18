@@ -5,7 +5,6 @@
 	import Icon from '$lib/components/icon/Icon.svelte'
 	import PlayerArtwork from '$lib/components/player/PlayerArtwork.svelte'
 	import Timeline from '$lib/components/player/Timeline.svelte'
-	import Slider from '$lib/components/Slider.svelte'
 	import PlayTogglePillButton from '$lib/components/player/buttons/PlayTogglePillButton.svelte'
 	import PlayPrevButton from '$lib/components/player/buttons/PlayPrevButton.svelte'
 	import PlayNextButton from '$lib/components/player/buttons/PlayNextButton.svelte'
@@ -274,7 +273,14 @@
 							class="text-onSurfaceVariant transition-colors hover:text-onSurface"
 						/>
 
-						<Slider bind:value={player.volume} class="flex-1" aria-label="Volume" />
+						<md-slider
+							value={player.volume}
+							oninput={(e: any) => player.volume = e.target.value}
+							min="0"
+							max="100"
+							class="flex-1"
+							aria-label="Volume"
+						></md-slider>
 
 						<IconButton
 							kind="flat"
