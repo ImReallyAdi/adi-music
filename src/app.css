@@ -154,6 +154,28 @@ source {
 	}
 }
 
+@keyframes fade-in-scale {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes fade-out-scale {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+}
+
 @layer base {
 	* {
 		scrollbar-width: thin;
@@ -254,11 +276,32 @@ source {
 	transform: scaleY(-1);
 }
 
-@utility text-headline-lg {
-	font-size: --spacing(8);
-	line-height: --spacing(10);
+@utility text-display-lg {
+	font-size: 57px;
+	line-height: 64px;
+	letter-spacing: -0.25px;
+	font-weight: 400;
+}
+
+@utility text-display-md {
+	font-size: 45px;
+	line-height: 52px;
 	letter-spacing: 0;
-	font-weight: 700;
+	font-weight: 400;
+}
+
+@utility text-display-sm {
+	font-size: 36px;
+	line-height: 44px;
+	letter-spacing: 0;
+	font-weight: 400;
+}
+
+@utility text-headline-lg {
+	font-size: 32px;
+	line-height: 40px;
+	letter-spacing: 0;
+	font-weight: 400;
 }
 
 @utility text-headline-md {
@@ -346,6 +389,23 @@ source {
 	scrollbar-gutter: stable;
 }
 
+/* Material 3 elevation shadows */
+@utility elevation-1 {
+	box-shadow: 0 1px 3px --alpha(var(--color-shadow) / 0.12), 0 1px 2px --alpha(var(--color-shadow) / 0.24);
+}
+
+@utility elevation-2 {
+	box-shadow: 0 3px 6px --alpha(var(--color-shadow) / 0.15), 0 2px 4px --alpha(var(--color-shadow) / 0.12);
+}
+
+@utility elevation-3 {
+	box-shadow: 0 10px 20px --alpha(var(--color-shadow) / 0.15), 0 3px 6px --alpha(var(--color-shadow) / 0.10);
+}
+
+@utility elevation-4 {
+	box-shadow: 0 14px 28px --alpha(var(--color-shadow) / 0.25), 0 10px 10px --alpha(var(--color-shadow) / 0.22);
+}
+
 @custom-variant active-view-player {
 	html:active-view-transition-type(player) & {
 		@slot;
@@ -373,28 +433,27 @@ source {
 		background-color: var(--color-surfaceContainer);
 		display: flex;
 		flex-direction: column;
-		border-radius: --spacing(2);
+		border-radius: --spacing(3);
 		color: var(--color-onSurface);
-		border: 1px solid var(--color-outline-variant);
+		border: none;
 		transition: all 0.3s var(--ease-standard);
+		@apply elevation-1;
 	}
 
 	.card:hover {
+		@apply elevation-2;
+		transform: translateY(-2px);
+	}
+
+	.card-outlined {
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		box-shadow: none;
+	}
+
+	.card-outlined:hover {
+		box-shadow: none;
 		border-color: var(--color-outline);
-		box-shadow: 0 4px 12px --alpha(var(--color-primary) / 0.15);
-	}
-
-	/* Material 3 elevation shadows */
-	.elevation-1 {
-		box-shadow: 0 1px 3px --alpha(var(--color-shadow) / 0.12), 0 1px 2px --alpha(var(--color-shadow) / 0.24);
-	}
-
-	.elevation-2 {
-		box-shadow: 0 3px 6px --alpha(var(--color-shadow) / 0.15), 0 2px 4px --alpha(var(--color-shadow) / 0.12);
-	}
-
-	.elevation-3 {
-		box-shadow: 0 10px 20px --alpha(var(--color-shadow) / 0.15), 0 3px 6px --alpha(var(--color-shadow) / 0.10);
 	}
 
 	/* Material 3 state layers */
@@ -440,6 +499,14 @@ source {
 		contain: strict;
 		will-change: transform, opacity;
 		pointer-events: none;
+	}
+
+	.animate-fade-in-scale {
+		animation: fade-in-scale 0.2s var(--ease-emphasized-decelerate) both;
+	}
+
+	.animate-fade-out-scale {
+		animation: fade-out-scale 0.1s var(--ease-emphasized-accelerate) both;
 	}
 }
 
