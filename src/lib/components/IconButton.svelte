@@ -10,16 +10,16 @@
 </script>
 
 <script lang="ts" generics="As extends AllowedButtonElement = 'button'">
-	const { icon, children, ...rest }: IconButtonProps<As> = $props()
+	const { icon, children, kind = 'blank', ...rest }: IconButtonProps<As> = $props()
 </script>
 
 <Button
 	{...rest}
-	kind="blank"
+	{kind}
 	class={[
-		'flex size-11 shrink-0 items-center justify-center rounded-full',
+		'flex size-10 shrink-0 items-center justify-center rounded-full',
 		rest.class,
-		rest.disabled && 'opacity-54',
+		rest.disabled && 'opacity-38', /* M3 disabled opacity is 0.38 */
 	]}
 >
 	{#if children}

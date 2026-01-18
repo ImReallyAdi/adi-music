@@ -45,13 +45,6 @@
 
 	let dialogHeader = $state<HTMLElement>()!
 
-	const getParts = () => {
-		const dialogBody = dialogHeader.querySelector<HTMLElement>('[data-dialog-content]')
-		const dialogFooter = dialogHeader.querySelector<HTMLElement>('[data-dialog-footer]')
-
-		return { dialogBody, dialogFooter }
-	}
-
 	const animateBackdrop = (dialog: HTMLDialogElement, isOut = false) => {
 		try {
 			dialog.animate(
@@ -75,79 +68,45 @@
 	}
 
 	const animateIn = (dialog: HTMLDialogElement) => {
-		const { dialogBody, dialogFooter } = getParts()
-
-		const fade = (el: HTMLElement | null): AnimationSequence | null =>
-			el ? [el, { opacity: [0, 1] }, { duration: 300, at: '<' }] : null
-
 		animateBackdrop(dialog)
 
 		const frames: readonly AnimationSequence[] = [
 			[
 				dialog,
 				{
-					transform: ['translateY(-20px)', 'none'],
-					clipPath: ['inset(0% 0% 100% 0% round 24px)', 'inset(0% 0% 0% 0% round 24px)'],
+					opacity: [0, 1],
+					transform: ['scale(0.9)', 'scale(1)'],
 				},
 				{
 					duration: 400,
+					// Emphasized Decelerate
+					easing: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
 				},
 			] satisfies AnimationSequence,
-			fade(dialogHeader),
-			dialogBody && fade(dialogBody),
-			dialogFooter && fade(dialogFooter),
-			dialogFooter &&
-				([
-					dialogFooter,
-					{ transform: ['translateY(-60px)', 'none'] },
-					{ duration: 400, at: '<' },
-				] satisfies AnimationSequence),
-		].filter((x) => x !== null && x !== undefined)
+		]
 
-		timeline(frames, {
-			defaultOptions: {
-				// ease-standard
-				easing: 'cubic-bezier(0.2, 0, 0, 1)',
-			},
-		})
+		timeline(frames)
 	}
 
 	const animateOut = (dialog: HTMLDialogElement) => {
-		const { dialogBody, dialogFooter } = getParts()
-
-		const fade = (el: HTMLElement | null): AnimationSequence | null =>
-			el ? [el, { opacity: [1, 0] }, { duration: 300, at: '<' }] : null
-
 		animateBackdrop(dialog, true)
 
 		const frames: readonly AnimationSequence[] = [
 			[
 				dialog,
 				{
-					transform: ['none', 'translateY(-20px)'],
-					clipPath: ['inset(0% 0% 0% 0% round 24px)', 'inset(0% 0% 100% 0% round 24px)'],
+					opacity: [1, 0],
+					transform: ['scale(1)', 'scale(0.9)'],
 				},
 				{
-					duration: 400,
+					duration: 200,
+					// Emphasized Accelerate
+					easing: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
 				},
 			] satisfies AnimationSequence,
-			dialogFooter &&
-				([
-					dialogFooter,
-					{ transform: ['none', 'translateY(-60px)'] },
-					{ duration: 400, at: '<' },
-				] satisfies AnimationSequence),
-			fade(dialogFooter),
-			fade(dialogBody),
-			fade(dialogHeader),
-		].filter((x) => x !== null)
+		]
 
-		return timeline(frames, {
-			defaultOptions: {
-				// ease-standard
-				easing: 'cubic-bezier(0.2, 0, 0, 1)',
-			},
-		})
+		return timeline(frames)
 	}
 
 	const onOpenAction = (dialog: HTMLDialogElement) => {
@@ -160,7 +119,7 @@
 
 		// TODO. A hack until svelte supports non duration based animations
 		return {
-			duration: 300,
+			duration: 200,
 		}
 	}
 </script>
@@ -183,7 +142,7 @@
 			close()
 		}}
 		class={[
-			'm-auto flex flex-col rounded-3xl bg-surfaceContainerHigh text-onSurface contain-content select-none focus:outline-none',
+			'm-auto flex flex-col rounded-3xl bg-surfaceContainerHigh text-onSurface contain-content select-none focus:outline-none elevation-3',
 			className,
 		]}
 	>
@@ -192,11 +151,11 @@
 			class={['flex flex-col gap-4 px-6 pt-6', icon && 'items-center justify-center text-center']}
 		>
 			{#if icon}
-				<Icon type={icon} class="text-secondary" />
+				<Icon type={icon} class="text-secondary size-6" />
 			{/if}
 
 			{#if title}
-				<div class="text-headline-sm">{title}</div>
+				<div class="text-headline-sm text-onSurface">{title}</div>
 			{/if}
 		</header>
 
@@ -229,7 +188,10 @@
 	}
 
 	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.22);
-		backdrop-filter: blur(4px);
+		background: rgba(0, 0, 0, 0.32);
+		backdrop-filter: blur(2px);
+        animation: fade-in 0.3s linear forwards;
 	}
+
+    /* Dialog requires elevation */
 </style>

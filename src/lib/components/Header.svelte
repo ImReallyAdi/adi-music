@@ -46,18 +46,19 @@
 
 <header
 	class={[
-		'ease-in-out inset-x-0 top-0 z-10 flex h-(--app-header-height) shrink-0 transition-[background-color] duration-200',
-		isScrolled && 'bg-surfaceContainerHigh',
+		'ease-emphasized inset-x-0 top-0 z-10 flex h-(--app-header-height) shrink-0 items-center transition-all duration-300',
+		!isScrolled && 'bg-surface text-onSurface',
+        isScrolled && 'bg-surfaceContainer text-onSurface shadow-sm',
 		isFixed ? 'fixed' : 'sticky',
 	]}
 >
 	<div class="mx-auto flex w-full max-w-(--app-max-content-width) items-center pr-2 pl-6">
 		{#if !noBackButton}
-			<BackButton class="mr-2" />
+			<BackButton class="mr-2 text-onSurface" />
 		{/if}
 
 		{#if title}
-			<div class="mr-auto text-title-lg">{title}</div>
+			<div class="mr-auto text-title-lg font-normal text-onSurface">{title}</div>
 		{/if}
 
 		<div class="flex items-center gap-2">

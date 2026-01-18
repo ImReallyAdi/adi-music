@@ -154,6 +154,28 @@ source {
 	}
 }
 
+@keyframes fade-scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes fade-scale-out {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+}
+
 @layer base {
 	* {
 		scrollbar-width: thin;
@@ -252,6 +274,27 @@ source {
 
 @utility flip-y {
 	transform: scaleY(-1);
+}
+
+@utility text-display-lg {
+    font-size: 57px;
+    line-height: 64px;
+    letter-spacing: -0.25px;
+    font-weight: 400;
+}
+
+@utility text-display-md {
+    font-size: 45px;
+    line-height: 52px;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+@utility text-display-sm {
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: 0;
+    font-weight: 400;
 }
 
 @utility text-headline-lg {
@@ -373,7 +416,7 @@ source {
 		background-color: var(--color-surfaceContainer);
 		display: flex;
 		flex-direction: column;
-		border-radius: --spacing(2);
+		border-radius: --spacing(3); /* M3 radius: 12dp usually, but 1rem (spacing(4)) is 16px */
 		color: var(--color-onSurface);
 		border: 1px solid var(--color-outline-variant);
 		transition: all 0.3s var(--ease-standard);
@@ -381,7 +424,8 @@ source {
 
 	.card:hover {
 		border-color: var(--color-outline);
-		box-shadow: 0 4px 12px --alpha(var(--color-primary) / 0.15);
+		/* M3 Level 2 Elevation for hover */
+		box-shadow: 0 3px 6px --alpha(var(--color-shadow) / 0.15), 0 2px 4px --alpha(var(--color-shadow) / 0.12);
 	}
 
 	/* Material 3 elevation shadows */
@@ -397,10 +441,19 @@ source {
 		box-shadow: 0 10px 20px --alpha(var(--color-shadow) / 0.15), 0 3px 6px --alpha(var(--color-shadow) / 0.10);
 	}
 
+    .elevation-4 {
+        box-shadow: 0 14px 28px --alpha(var(--color-shadow) / 0.25), 0 10px 10px --alpha(var(--color-shadow) / 0.22);
+    }
+
+    .elevation-5 {
+        box-shadow: 0 19px 38px --alpha(var(--color-shadow) / 0.30), 0 15px 12px --alpha(var(--color-shadow) / 0.22);
+    }
+
 	/* Material 3 state layers */
 	.state-layer {
 		position: relative;
-		transition: all 0.3s var(--ease-standard);
+		overflow: hidden;
+		isolation: isolate;
 	}
 
 	.state-layer::before {
@@ -410,12 +463,17 @@ source {
 		background-color: currentColor;
 		opacity: 0;
 		border-radius: inherit;
-		transition: opacity 0.3s var(--ease-standard);
+		transition: opacity 0.2s var(--ease-standard);
 		pointer-events: none;
+        z-index: 0;
 	}
 
 	.state-layer:hover::before {
 		opacity: 0.08;
+	}
+
+	.state-layer:focus-visible::before {
+		opacity: 0.12;
 	}
 
 	.state-layer:active::before {
@@ -441,6 +499,15 @@ source {
 		will-change: transform, opacity;
 		pointer-events: none;
 	}
+
+    /* Animation Utilities */
+    .animate-fade-scale-in {
+        animation: fade-scale-in 0.3s var(--ease-emphasized-decelerate) forwards;
+    }
+
+    .animate-fade-scale-out {
+        animation: fade-scale-out 0.2s var(--ease-emphasized-accelerate) forwards;
+    }
 }
 
 /* Hide Netlify preview bar */

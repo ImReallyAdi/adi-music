@@ -16,296 +16,197 @@
 	const features: Feature[] = [
 		{
 			icon: 'palette',
-			title: 'Dynamic theming',
+			title: 'Dynamic Theming',
 			description:
-				'Material 3 inspired design that adapts to your music artwork with stunning color harmonies and smooth transitions.',
+				'Material Design 3 styles that adapt to your music artwork, creating a personal and immersive experience.',
 		},
 		{
 			icon: 'flash',
-			title: 'Blazingly fast',
+			title: 'Blazingly Fast',
 			description:
-				'Optimized performance with instant loading, seamless playback, and responsive controls for modern browsers.',
+				'Instant loading, seamless playback, and responsive controls. Built for performance on modern browsers.',
 		},
 		{
 			icon: 'cellphone',
-			title: 'Works everywhere',
+			title: 'Universal Access',
 			description:
-				'Experience adi music on your phone, tablet, or desktop. Open in your browser—no downloads, no complications.',
+				'Works on your phone, tablet, or desktop. No installs needed—just open in your browser and play.',
 		},
 		{
 			icon: 'lock',
-			title: 'Privacy by design',
+			title: 'Privacy First',
 			description:
-				'Your music stays on your device. No tracking, no accounts, no compromise. Just you, your music, and your privacy.',
+				'Your music never leaves your device. No tracking, no accounts, just you and your local library.',
 		},
 	]
 
 	const benefits = [
-		'Browse and discover with intelligent search and advanced filters',
-		'Create custom playlists for every mood, moment, and occasion',
-		'Control playback with keyboard shortcuts and native media keys',
-		'Works completely offline—your music, always accessible',
-		'Syncs playback state across your devices seamlessly',
+		'Intelligent search and advanced filtering',
+		'Custom playlists for every mood',
+		'Keyboard shortcuts & media key support',
+		'Works completely offline',
+		'Seamless cross-device state sync',
 	]
 </script>
 
 <svelte:head>
-	<title>{m.appName()} - Your Music, Your Way</title>
+	<title>{m.appName()} - Local Music Reimagined</title>
 	<meta
 		name="description"
-		content="adi music: A fork of Snae Player—a privacy-first, high-performance music player for your local library. Designed with Material 3 principles for a beautiful, expressive experience."
+		content="Adi Music: A stunning, privacy-first local music player. Material Design 3, dynamic theming, and offline playback in your browser."
 	/>
-
 	<link rel="canonical" href={page.url.href} />
 </svelte:head>
 
 <Header title={m.appName()} noBackButton mode="fixed-no-spacer">
-	<div class="flex items-center gap-2 text-body-md text-onSurfaceVariant">
-		<span class="text-label-md">A fork of Snae Player</span>
+	<div class="hidden sm:flex items-center gap-2 text-body-md text-onSurfaceVariant mr-4">
+		<span class="text-label-md">Fork of Snae Player</span>
 	</div>
 	<IconButton
 		as="a"
 		href="https://github.com/minht11/local-music-pwa"
 		target="_blank"
-		kind="flat"
-		tooltip="View source code on GitHub"
+		kind="blank"
+		tooltip="View source on GitHub"
 	>
 		<Icon type="github" />
 	</IconButton>
-	<Button as="a" href="/library/tracks" kind="outlined">Launch Player</Button>
+	<Button as="a" href="/library/tracks" kind="filled">Launch Player</Button>
 </Header>
 
-<section
-	class="content-width-using-grid relative justify-items-center overflow-hidden px-6 pt-24 pb-0 lg:pt-32 lg:pb-24"
->
-	<div inert class="animated-gradient absolute -inset-x-32 -inset-y-16"></div>
+<div class="flex flex-col min-h-screen bg-surface text-onSurface overflow-x-hidden">
+	<!-- Hero Section -->
+	<section class="relative pt-32 pb-20 px-6 lg:pt-40 lg:pb-32">
+		<!-- Background Elements -->
+		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -z-10 pointer-events-none opacity-60"></div>
+		<div class="absolute top-20 right-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[80px] -z-10 pointer-events-none opacity-40"></div>
 
-	<div class="relative z-0 mt-(--app-header-height) max-w-4xl text-center">
-		<h1 class="mb-6 text-headline-md leading-tight font-bold text-onSurface lg:text-headline-lg">
-			Your music, <span class="text-primary">your way</span>
-		</h1>
-		<p
-			class="mx-auto mb-8 max-w-2xl text-title-md leading-relaxed text-onSurfaceVariant sm:text-title-lg"
-		>
-			Experience a beautifully designed music player built for your local library. Privacy-focused, fast, and
-			expressive—just like your music deserves.
-		</p>
+		<div class="max-w-4xl mx-auto text-center space-y-8 animate-fade-scale-in">
+			<h1 class="text-display-sm sm:text-display-md lg:text-display-lg font-bold tracking-tight text-onSurface leading-tight">
+				Your Music, <br class="sm:hidden" />
+				<span class="text-primary">Reimagined.</span>
+			</h1>
+			<p class="text-headline-sm text-onSurfaceVariant max-w-2xl mx-auto leading-relaxed">
+				Experience a beautifully designed, privacy-focused music player for your local library.
+				Built with Material Design 3.
+			</p>
 
-		<div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-			<Button as="a" href="/library/tracks" kind="filled" class="w-full sm:w-60">
-				Start Listening
-			</Button>
-			<div class="text-body-md text-onSurfaceVariant">Free • No sign-up • Fully offline</div>
-		</div>
-	</div>
-
-	<img
-		class="hero-image-slide-in relative mt-16 flex aspect-7/5 h-100 w-auto max-w-full items-center justify-center rounded-2xl bg-surfaceContainerHighest object-cover object-left-bottom ring ring-outline/10 sm:h-120"
-		src={heroImg.src}
-		width={heroImg.width}
-		height={heroImg.height}
-		alt="App Screenshot"
-		loading="eager"
-		fetchpriority="high"
-	/>
-</section>
-
-<section class="content-width py-20">
-	<div class="mb-16 text-center">
-		<h2 class="mb-4 text-headline-md font-bold text-onSurface sm:text-headline-md">
-			Music the way you want it
-		</h2>
-		<p class="mx-auto max-w-xl text-title-md text-onSurfaceVariant">
-			Designed with Material 3 principles for beauty and expressiveness. Features that celebrate your music without compromising
-			your privacy.
-		</p>
-	</div>
-
-	<div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
-		{#each features as feature}
-			<div
-				class="card group relative overflow-hidden p-8 transition-all duration-300 hover:bg-inverseSurface hover:shadow-2xl"
-			>
-				<div
-					class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-				></div>
-				<div class="relative z-10">
-					<div
-						class="mb-6 flex size-12 items-center justify-center rounded-full bg-tertiaryContainer transition-transform duration-300 group-hover:scale-110"
-					>
-						<Icon type={feature.icon} class="text-primary" />
-					</div>
-					<h3
-						class="mb-3 text-title-lg font-semibold text-onSurface transition-colors duration-300 group-hover:text-inverseOnSurface"
-					>
-						{feature.title}
-					</h3>
-					<p
-						class="text-body-lg leading-relaxed text-onSurfaceVariant transition-colors duration-300 group-hover:text-inverseOnSurface"
-					>
-						{feature.description}
-					</p>
-				</div>
+			<div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+				<Button as="a" href="/library/tracks" kind="filled" class="h-12 px-8 w-full sm:w-auto text-title-md rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-shadow">
+					Start Listening
+				</Button>
+				<Button as="a" href="https://github.com/minht11/local-music-pwa" target="_blank" kind="toned" class="h-12 px-8 w-full sm:w-auto text-title-md rounded-full">
+					<Icon type="github" class="mr-2 size-5" />
+					View Source
+				</Button>
 			</div>
-		{/each}
-	</div>
-</section>
 
-<section class="bg-surfaceContainer py-20">
-	<div class="content-width">
-		<div class="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
-			<div>
-				<h2 class="mb-6 text-headline-md font-bold text-onSurface sm:text-headline-md">
-					Everything you need in one beautiful app
+            <div class="pt-8 text-label-lg text-onSurfaceVariant/80 flex items-center justify-center gap-6">
+                <span class="flex items-center gap-2"><Icon type="check" class="size-4 text-primary" /> Free & Open Source</span>
+                <span class="flex items-center gap-2"><Icon type="check" class="size-4 text-primary" /> No Signup</span>
+                <span class="flex items-center gap-2"><Icon type="check" class="size-4 text-primary" /> Offline</span>
+            </div>
+		</div>
+
+		<!-- Hero Image -->
+		<div class="mt-20 max-w-5xl mx-auto relative group animate-fade-scale-in" style="animation-delay: 0.2s; opacity: 0;">
+			<div class="absolute -inset-1 bg-gradient-to-r from-primary to-tertiary rounded-3xl opacity-20 blur-2xl transition duration-500 group-hover:opacity-30"></div>
+			<img
+				src={heroImg.src}
+				width={heroImg.width}
+				height={heroImg.height}
+				class="relative rounded-2xl sm:rounded-3xl shadow-2xl border border-outline-variant/20 w-full h-auto bg-surfaceContainer"
+				alt="App Screenshot"
+				loading="eager"
+			/>
+		</div>
+	</section>
+
+	<!-- Features Section -->
+	<section class="py-24 px-6 bg-surfaceContainerLow/50">
+		<div class="max-w-6xl mx-auto">
+			<div class="text-center mb-16">
+				<h2 class="text-headline-md sm:text-headline-lg font-bold text-onSurface mb-4">Why Adi Music?</h2>
+				<p class="text-title-lg text-onSurfaceVariant max-w-2xl mx-auto">
+					Designed to be the best home for your local music collection.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+				{#each features as feature}
+					<div class="group bg-surfaceContainer hover:bg-surfaceContainerHigh rounded-3xl p-8 transition-all duration-300 border border-transparent hover:border-outline-variant hover:shadow-lg">
+						<div class="mb-6 size-14 rounded-2xl bg-secondaryContainer text-onSecondaryContainer flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+							<Icon type={feature.icon} class="size-7" />
+						</div>
+						<h3 class="text-headline-sm font-semibold mb-3 text-onSurface">{feature.title}</h3>
+						<p class="text-body-lg text-onSurfaceVariant leading-relaxed">{feature.description}</p>
+					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
+
+	<!-- Benefits Section -->
+	<section class="py-24 px-6 overflow-hidden">
+		<div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+			<div class="order-2 lg:order-1">
+				<h2 class="text-headline-md sm:text-headline-lg font-bold text-onSurface mb-8">
+					Everything you need, <br />
+					<span class="text-primary">nothing you don't.</span>
 				</h2>
-				<ul class="space-y-4">
+				<ul class="space-y-6">
 					{#each benefits as benefit}
-						<li class="group flex items-center gap-4 transition-all duration-300">
-							<div class="relative">
-								<div class="rounded-full bg-primary/10 p-2 transition-all duration-300 group-hover:bg-primary group-hover:scale-110">
-									<Icon type="check" class="text-primary transition-colors duration-300 group-hover:text-onPrimary" />
-								</div>
-								<div class="absolute inset-0 rounded-full bg-primary/20 opacity-0 scale-150 animate-pulse group-hover:opacity-0"></div>
+						<li class="flex items-center gap-4 group">
+							<div class="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-onPrimary transition-colors duration-300">
+								<Icon type="check" class="size-5" />
 							</div>
-							<span class="text-body-lg text-onSurfaceVariant transition-colors duration-300 group-hover:text-onSurface">{benefit}</span>
+							<span class="text-title-lg text-onSurfaceVariant group-hover:text-onSurface transition-colors">{benefit}</span>
 						</li>
 					{/each}
 				</ul>
+
+                <div class="mt-10">
+                    <Button as="a" href="/library/tracks" kind="filled" class="rounded-full h-12 px-8">
+                        Try It Now
+                    </Button>
+                </div>
 			</div>
-			<img
-				class="flex w-full items-center justify-center rounded-2xl bg-surfaceContainerHigh object-contain object-bottom ring ring-outline/10 transition-transform duration-300 hover:scale-105"
-				src={secondaryImg.src}
-				width={secondaryImg.width}
-				height={secondaryImg.height}
-				alt="Feature Illustration"
-				loading="lazy"
-			/>
+
+            <div class="order-1 lg:order-2 relative">
+                <div class="absolute inset-0 bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-full blur-3xl -z-10"></div>
+                <img
+                    src={secondaryImg.src}
+                    width={secondaryImg.width}
+                    height={secondaryImg.height}
+                    class="rounded-3xl shadow-2xl border border-outline-variant/20 w-full h-auto rotate-1 hover:rotate-0 transition-transform duration-500"
+                    alt="Features Illustration"
+                    loading="lazy"
+                />
+            </div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<section class="content-width py-20">
-	<div class="mx-auto max-w-xl text-center">
-		<h2 class="mb-6 text-headline-md font-bold text-onSurface sm:text-headline-md">
-			Ready to experience great music?
-		</h2>
-		<p class="mb-8 text-title-md text-onSurfaceVariant">
-			Start exploring your music collection with a beautifully designed player that respects your privacy and celebrates your music.
-		</p>
-		<Button as="a" href="/library/tracks" kind="filled">
-			Open {m.appName()}
-		</Button>
-	</div>
-</section>
-
-<footer class="content-width py-8">
-	<div class="w-full rounded-4xl bg-gradient-to-br from-surfaceContainerHigh to-surfaceContainerHighest p-8 shadow-2xl transition-all duration-300 hover:shadow-3xl">
-		<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-			<div class="flex items-center gap-3 text-title-md font-medium text-onSurface">
-				<img src="/icons/responsive.svg" width="24" height="24" alt="adi music Logo" class="size-6 transition-transform duration-300 hover:scale-110" />
-				<span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{m.appName()}</span>
-				<span class="text-body-sm text-onSurfaceVariant">• Fork of <a href="https://github.com/minht11/snae-player" target="_blank" class="link text-primary hover:underline">Snae Player</a></span>
+	<!-- Footer -->
+	<footer class="py-12 px-6 bg-surfaceContainer">
+		<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+			<div class="flex items-center gap-3">
+				<img src="/icons/responsive.svg" width="32" height="32" alt="Logo" class="opacity-80" />
+				<span class="text-title-lg font-bold text-onSurface">{m.appName()}</span>
 			</div>
 
-			<div class="flex items-center gap-6 text-body-md">
-				<a
-					href="https://github.com/minht11/local-music-pwa"
-					target="_blank"
-					class="link flex items-center gap-2 text-onSurfaceVariant transition-all duration-200 hover:text-primary hover:scale-105"
-				>
-					<Icon type="github" class="h-5 w-5" />
-					{m.aboutSourceCode()}
-				</a>
-
-				<a
-					href="https://github.com/minht11/local-music-pwa#privacy"
-					target="_blank"
-					class="link text-onSurfaceVariant transition-all duration-200 hover:text-primary hover:scale-105"
-				>
-					{m.aboutPrivacy()}
-				</a>
+			<div class="flex flex-wrap justify-center gap-8 text-title-sm text-onSurfaceVariant">
+				<a href="https://github.com/minht11/local-music-pwa" target="_blank" class="hover:text-primary transition-colors">GitHub</a>
+				<a href="https://github.com/minht11/local-music-pwa/blob/main/LICENSE.txt" target="_blank" class="hover:text-primary transition-colors">License</a>
+				<a href="https://github.com/minht11/snae-player" target="_blank" class="hover:text-primary transition-colors">Credits</a>
 			</div>
+
+            <div class="text-body-sm text-onSurfaceVariant/60">
+                &copy; {new Date().getFullYear()} Adi Music
+            </div>
 		</div>
-	</div>
-</footer>
+	</footer>
+</div>
 
 <style>
-	.content-width {
-		width: 100%;
-		max-width: 1200px;
-		padding-left: 24px;
-		padding-right: 24px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.content-width-using-grid {
-		display: grid;
-		grid-template-columns: minmax(0, var(--content-max-width));
-		justify-content: center;
-	}
-
-	.card {
-		transition: all var(--ease-standard) 0.3s;
-		border-radius: 1rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-outline-variant);
-	}
-
-	.card:hover {
-		transform: translateY(-4px);
-		border-color: var(--color-primary);
-	}
-
-	.hero-image-slide-in {
-		animation: hero-image-slide-in 0.6s var(--ease-outgoing40) forwards;
-	}
-
-	@keyframes hero-image-slide-in {
-		0% {
-			transform: translateY(48px);
-			opacity: 0;
-		}
-		100% {
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-
-	.animated-gradient {
-		background: radial-gradient(
-			ellipse 1400px 800px at 0% 30%,
-			--alpha(var(--color-tertiary) / 0.15),
-			--alpha(var(--color-tertiary) / 0.08),
-			transparent 60%
-		);
-		filter: blur(16px);
-		transform-origin: top;
-		animation: glow-pulse 24s ease-in-out infinite;
-	}
-
-	@keyframes glow-pulse {
-		0% {
-			transform: scale(0.9, 1);
-			opacity: 0.6;
-		}
-		50% {
-			transform: scale(1.5, 1);
-			opacity: 1;
-		}
-		100% {
-			transform: scale(0.9, 1);
-			opacity: 0.6;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.hero-image-slide-in,
-		.animated-gradient,
-		.card,
-		.group {
-			animation: none;
-			transition: none;
-		}
-	}
+    /* Custom utility overrides or specific animations if needed */
 </style>

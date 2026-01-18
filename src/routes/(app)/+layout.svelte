@@ -236,13 +236,13 @@
 		&::view-transition-old(root) {
 			animation:
 				view-regular-fade-out 90ms var(--ease-outgoing40) forwards,
-				view-regular-out 300ms var(--ease-incoming80outgoing40);
+				view-regular-out 300ms var(--ease-emphasized) forwards;
 		}
 
 		&::view-transition-new(root) {
 			animation:
 				view-regular-fade-in 210ms 90ms var(--ease-incoming80) backwards,
-				view-regular-in 300ms var(--ease-incoming80outgoing40);
+				view-regular-in 300ms var(--ease-emphasized) backwards;
 		}
 
 		&::view-transition-old(pl-card) {
@@ -254,11 +254,11 @@
 		}
 
 		&::view-transition-new(bottom-bar):only-child {
-			animation: view-bottom-bar-in 300ms var(--ease-standard) forwards;
+			animation: view-bottom-bar-in 300ms var(--ease-emphasized-decelerate) forwards;
 		}
 
 		&::view-transition-old(bottom-bar):only-child {
-			animation: view-bottom-bar-out 300ms var(--ease-standard) forwards;
+			animation: view-bottom-bar-out 300ms var(--ease-emphasized-accelerate) forwards;
 		}
 	}
 </style>

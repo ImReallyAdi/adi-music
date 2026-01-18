@@ -41,8 +41,9 @@
 	{style}
 	{tabindex}
 	class={[
-		className,
-		'flex cursor-pointer items-center overflow-hidden rounded-lg pr-2 pl-4 -outline-offset-2 contain-content hover:bg-onSurface/10',
+		'interactable flex cursor-pointer items-center overflow-hidden pr-2 pl-4 outline-none contain-content',
+        'rounded-xl transition-colors duration-200', /* M3 styling */
+        className,
 	]}
 	role="row"
 	aria-label={ariaLabel}
@@ -71,7 +72,7 @@
 		<IconButton
 			tabindex={-1}
 			icon="moreVertical"
-			class="text-onSurfaceVariant"
+			class="ml-auto text-onSurfaceVariant"
 			tooltip={m.moreOptions()}
 			onclick={(e) => {
 				e.stopPropagation()

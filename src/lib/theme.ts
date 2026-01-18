@@ -45,6 +45,9 @@ export type PaletteToken =
 	| 'inverseOnSurface'
 	| 'inversePrimary'
 
+// Material Red 600
+export const DEFAULT_THEME_COLOR = '#B3261E'
+
 type Tone = keyof CorePalette
 type PaletteTokenInput = readonly [tone: Tone, light: number, dark: number]
 
@@ -151,12 +154,17 @@ export const updateThemeCssVariables = (
 	argbOrHex: number | string | null,
 	isDark: boolean,
 ): void => {
-	const argb =
+	let argb =
 		typeof argbOrHex === 'number'
 			? argbOrHex
 			: typeof argbOrHex === 'string'
 				? argbFromHex(argbOrHex)
 				: null
+
+	// Fallback to default theme if no color is provided
+	if (!argb) {
+		argb = argbFromHex(DEFAULT_THEME_COLOR)
+	}
 
 	if (argb) {
 		setThemeCssVariables(argb, isDark)

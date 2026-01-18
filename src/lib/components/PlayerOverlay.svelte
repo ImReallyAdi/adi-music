@@ -21,7 +21,8 @@
 <div
 	id="mini-player"
 	class={[
-		'pointer-events-auto mx-auto max-w-225 justify-between overflow-hidden rounded-2xl border border-primary/10 bg-secondaryContainer text-onSecondaryContainer contain-content view-name-[pl-card] sm:h-auto sm:rounded-3xl active-view-player:border-transparent',
+		'pointer-events-auto mx-auto max-w-225 justify-between overflow-hidden rounded-3xl border border-outline-variant/20 bg-surfaceContainerHighest text-onSurface contain-content view-name-[pl-card] sm:h-auto active-view-player:border-transparent',
+		'elevation-2 shadow-shadow/20 transition-all duration-300 ease-emphasized',
 		className,
 	]}
 >
@@ -39,7 +40,7 @@
 					class="max-sm:rounded-r-4 group flex grow items-center rounded-lg pr-2 max-sm:p-2 sm:h-11 sm:max-w-45"
 				>
 					<div
-						class="relative -z-1 size-11 shrink-0 overflow-hidden rounded-lg bg-onSecondary active-view-player:view-name-[pl-artwork]"
+						class="relative -z-1 size-11 shrink-0 overflow-hidden rounded-lg bg-surfaceContainerLow active-view-player:view-name-[pl-artwork]"
 					>
 						{#if track}
 							<PlayerArtwork class="size-full" />
@@ -57,10 +58,10 @@
 
 					{#if track}
 						<div class="mr-1 ml-4 grid min-w-0">
-							<div class="truncate text-body-md">
+							<div class="truncate text-body-md text-onSurface">
 								{track.name}
 							</div>
-							<div class="truncate text-body-sm">{formatArtists(track.artists)}</div>
+							<div class="truncate text-body-sm text-onSurfaceVariant">{formatArtists(track.artists)}</div>
 						</div>
 					{/if}
 				</Button>

@@ -106,6 +106,7 @@
 			...position,
 		})
 
+		// M3 Enter Animation
 		timeline([
 			[
 				menuEl,
@@ -113,19 +114,19 @@
 					opacity: [0, 1],
 				},
 				{
-					duration: 45,
+					duration: 100,
 					easing: 'linear',
 				},
 			],
 			[
 				menuEl,
 				{
-					transform: ['scale(.8)', 'none'],
+					transform: ['scale(.9)', 'none'],
 				},
 				{
-					duration: 150,
-					// incoming 80
-					easing: 'cubic-bezier(0, 0, 0.2, 1)',
+					duration: 250,
+					// Emphasized Decelerate
+					easing: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
 					at: '<',
 				},
 			],
@@ -142,14 +143,17 @@
 
 		closing = true
 
+		// M3 Exit Animation
 		void menuEl
 			.animate(
 				{
 					opacity: [1, 0],
+                    transform: ['scale(1)', 'scale(0.95)']
 				},
 				{
-					duration: 100,
-					easing: 'linear',
+					duration: 150,
+					// Emphasized Accelerate
+                    easing: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
 				},
 			)
 			.finished.then(() => {
